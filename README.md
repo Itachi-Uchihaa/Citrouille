@@ -1,0 +1,2 @@
+# Citrouille
+Réaliser une application facilitant l’apprentissage de listes de mots par des étudiants de primaires, l’application reprend le principe de la dictée magique. Un enseignant crée une liste de mots que l’enfant doit connaitre. L’application présente ensuite à l’enfant le son et ou l’image, l’élève doit saisir le mot et l’application lui indique si c’est bon ou faux, puis lui propose la correction du mot. Les mots de la liste sont présentés en ordre aléatoire.
