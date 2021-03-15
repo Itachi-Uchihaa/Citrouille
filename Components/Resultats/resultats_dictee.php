@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+<?php include("../Navbar/navbar.php") ?>
 <?php
 $db_id = 'root';
 $db_utilisateur_password = '';
