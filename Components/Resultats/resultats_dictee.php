@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+    
+<?php
+$db_id = 'root';
+$db_utilisateur_password = '';
+$db_name = 'citrouille';
+$db_host = 'localhost';
+//var_dump($db_host, $db_id, $db_utilisateur_password, $db_name);
+$db = mysqli_connect($db_host, $db_id, $db_utilisateur_password, $db_name) or die('Connexion échoué');
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -25,26 +34,24 @@
                 </tr>
             </thead>
             <tbody>
+                <?php $req = 'SELECT note.note_id, note.liste_id, note.utilisateur_id, note.note_appreciation, liste.liste_nom, utilisateur.utilisateur_nom, utilisateur.utilisateur_prenom, note.note FROM note, liste, utilisateur WHERE note.liste_id = liste.liste_id AND note.utilisateur_id = utilisateur.utilisateur_id';
+                $exec_req = mysqli_query($db, $req);
+                $reponse = mysqli_fetch_array($exec_req);       
+                foreach ($exec_req as $note) {                        
+                ?>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <th scope="row"><?php echo $note['note_id']; ?></th>
+                    <td><?php echo utf8_encode($note['liste_nom']); ?></td>
+                    <td><?php echo utf8_encode($note['utilisateur_nom']); ?></td>
+                    <td><?php echo utf8_encode($note['utilisateur_prenom']); ?></td>
+                    <td><?php echo utf8_encode($note['note']); ?></td>
+                    <td><?php echo utf8_encode($note['note_appreciation']); ?></td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                <?php 
+                }
+                ?>
             </tbody>
         </table>
     </div>
 </body>
-
 </html>
