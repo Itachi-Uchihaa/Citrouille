@@ -29,7 +29,7 @@
                 </div>
                 <div class="row" style="margin-top: 5rem;">
                     <i class="fas fa-lock"></i>
-                    <input placeholder="Mot de" type="password" name="utilisateur_password" class="input">
+                    <input placeholder="Mot de passe" type="password" name="utilisateur_password" class="input">
                 </div>
                 <button class="btn" type="submit">Connexion</button>
                 <?php
