@@ -1,0 +1,123 @@
+
+nav {
+    width: 10vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+}
+
+nav .brand {
+    font-weight: bold;
+}
+
+nav div.nav-group {
+    display: flex;
+    padding: 50px;
+}
+
+a.menu-item {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.5s ease;
+    border-bottom: 3px solid rgba(0,0,0,0);
+}
+
+a.menu-item:hover {
+    border-bottom: 3px solid #303030;
+}
+
+.nav-group.hamburger {
+    display: none;
+}
+
+.menus .hamburger {
+    display: none;
+}
+
+.menus .hamburger div:first-of-type {
+    transform: rotate(-45deg) translate(-3px, 2px);
+}
+.menus .hamburger div:last-of-type {
+    transform: rotate(45deg) translate(-3px, -2px);
+}
+
+.hamburger div {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: #303030;
+    margin: 5px;
+}
+
+.nav-group.menus .menu-item:not(:first-child) {
+    margin-left: 1.4rem;
+}
+
+section {
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section h2 {
+    padding: 2.4rem;
+    background-color: #fff;
+    font-weight: bold;
+    border-bottom: 0.6rem solid #303030;
+}
+
+section.sect-1 {
+    background-image: url(https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1650&q=80);
+}
+
+section.sect-2 {
+    background-image: url(https://images.unsplash.com/photo-1462392246754-28dfa2df8e6b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1650&q=80);
+}
+
+@media screen and (max-width: 576px) {
+    .menus.nav-group {
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        padding: 0 !important;
+        margin: 0 !important;
+        position: fixed;
+        top: -100vh;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.7s ease;
+    }
+
+    .menus.nav-group.show {
+        top: 0;
+    }
+
+    .menus.nav-group a {
+        font-size: 1.5rem;
+    }
+
+    .menus.nav-group a.menu-item:not(:first-child) {
+        margin-left: 0;
+        margin-top: 1.7rem;
+    }
+
+    .nav-group.hamburger {
+        display: block;
+    }
+
+    .menus .hamburger {
+        display: block;
+        position: absolute;
+        top: 50px;
+        right: 50px;
+    }
+}
