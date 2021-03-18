@@ -83,50 +83,58 @@ session_start(); // On démarre la session AVANT toute chose
     <div id="droite">
       <div id="popup_add_liste" class="overlay">
         <div class="popup">
-          <h2 style="margin: center;">Création Liste</h2>
+          <h2 style="text-align: center;">Création Liste</h2>
           <a style="padding-top:0%; margin-top:0%;" class="close" onclick="closePopUp()">&times;</a>
-          <ul class="nav nav-tabs nav-fill " id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <a class="nav-link active" id="pills-manuel-tab" data-toggle="pill" href="#pills-manuel" role="tab" aria-controls="pills-manuel" aria-selected="true">Insertion manuel</a>
-            </li>
-          </ul>
           <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-manuel" role="tabpanel" aria-labelledby="pills-manuel-tab">
               <form method="POST" action="action_liste.php">
                 <ul>
-                  <p>
-                    Nom Liste: <input type="text" name="liste_nom" class="field-style field-full align-none" placeholder="" required>
-                  </p>
-                  <p>
-                    Mot 1: <input type="text" name="mot_1" class="field-style field-full align-none" placeholder="" required>
-                  </p>
-                  <p>
-                    Mot 2: <input type="text" name="mot_2" class="field-style field-full align-none" placeholder="" required>
-                  </p>
-                  <p>
-                    Mot 3: <input type="text" name="mot_3" class="field-style field-full align-none" placeholder="" required>
-                  </p>
-                  <p>
-                    Mot 4: <input type="text" name="mot_4" class="field-style field-full align-none" placeholder="" required>
-                  </p>
-                  <p>
-                    Mot 5: <input type="text" name="mot_5" class="field-style field-full align-none" placeholder="" required>
-                  </p>
-                  <p>
-                    Mot 6: <input type="text" name="mot_6" class="field-style field-full align-none" placeholder="" required>
-                  </p>
-                  <p>
-                    Mot 7: <input type="text" name="mot_7" class="field-style field-full align-none" placeholder="" required>
-                  </p>
-                  <p>
-                    Mot 8: <input type="text" name="mot_8" class="field-style field-full align-none" placeholder="" required>
-                  </p>
-                  <p>
-                    Mot 9: <input type="text" name="mot_9" class="field-style field-full align-none" placeholder="" required>
-                  </p>
-                  <p>
-                    Mot 10: <input type="text" name="mot_10" class="field-style field-full align-none" placeholder="" required>
-                  </p>
+                  <div>
+                    <label style="display: block;">Nom Liste</label>
+                    <input type="text" name="liste_nom" class="field-style field-full align-none" placeholder="" required>
+                  </div>
+                  <div style="display: inline-block;">
+                    <label style="display: block;">Mot 1</label>
+                    <input type="text" name="mot_1" class="field-style field-full align-none" placeholder="" required>
+                  </div>
+                  <div style="display: inline-block;">
+                    <label style="display: block;">Mot 2</label>
+                    <input type="text" name="mot_2" class="field-style field-full align-none" placeholder="" required>
+                  </div>
+                  <div style="display: inline-block;">
+                    <label style="display: block;">Mot 3</label>
+                    <input type="text" name="mot_3" class="field-style field-full align-none" placeholder="" required>
+                  </div>
+                  <div style="display: inline-block;">
+                    <label style="display: block;">Mot 4</label>
+                    <input type="text" name="mot_4" class="field-style field-full align-none" placeholder="" required>
+                  </div>
+                  </br>
+                  <div style="display: inline-block;">
+                    <label style="display: block;">Mot 5</label>
+                    <input type="text" name="mot_5" class="field-style field-full align-none" placeholder="" required>
+                  </div>
+                  <div style="display: inline-block;">
+                    <label style="display: block;">Mot 6</label>
+                    <input type="text" name="mot_6" class="field-style field-full align-none" placeholder="" required>
+                  </div>
+                  <div style="display: inline-block;">
+                    <label style="display: block;">Mot 7</label>
+                    <input type="text" name="mot_7" class="field-style field-full align-none" placeholder="" required>
+                  </div>
+                  <div style="display: inline-block;">
+                    <label style="display: block;">Mot 8</label>
+                    <input type="text" name="mot_8" class="field-style field-full align-none" placeholder="" required>
+                  </div>
+                  </br>
+                  <div style="display: inline-block;">
+                    <label style="display: block;">Mot 9</label>
+                    <input type="text" name="mot_9" class="field-style field-full align-none" placeholder="" required>
+                  </div>
+                  <div style="display: inline-block;">
+                    <label style="display: block;">Mot 10</label>
+                    <input type="text" name="mot_10" class="field-style field-full align-none" placeholder="" required>
+                  </div>
                   </br>
                   </br>
                   <button name="add_liste">Créer liste</button>
@@ -138,11 +146,6 @@ session_start(); // On démarre la session AVANT toute chose
       </div>
       <div class="table-wrapper">
         <table class="table table-bordered table-striped center">
-          <?php
-            $sql = mysqli_query($link, "SELECT * FROM liste NATURAL JOIN mot");
-            $reponse = mysqli_fetch_row($sql);
-            var_dump($reponse);
-          ?>
           <thead>
             <tr>
               <th scope="col"></th>
@@ -163,7 +166,7 @@ session_start(); // On démarre la session AVANT toute chose
           <tbody>
           <?php
             $req_liste = mysqli_query($link, "SELECT * FROM liste");
-            $reponse2 = mysqli_fetch_row($req_liste);
+            $reponse1 = mysqli_fetch_row($req_liste);
             foreach($req_liste as $liste) 
             {
               echo'<tr>
@@ -232,14 +235,16 @@ session_start(); // On démarre la session AVANT toute chose
                   </form>
                 </td>
                 <td>'.$liste['liste_nom'].'</td>';
-                foreach ($sql as $dictee) 
+                $req_liste_id = mysqli_query($link, "SELECT * FROM liste NATURAL JOIN mot WHERE liste_id = ".$liste['liste_id']);
+                $reponse2 = mysqli_fetch_row($req_liste_id);
+                foreach($req_liste_id as $liste_id)
                 {
-                  echo '<td>'.$dictee['mot_nom'].'</td>';
+                  echo '<td>'.$liste_id['mot_nom'].'</td>';
                 }
               echo '</tr>';
             }
           ?>
-          </tbody>
+          </tbody> 
         </table>
         </div>
       </div>
