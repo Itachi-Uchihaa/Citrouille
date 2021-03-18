@@ -10,7 +10,7 @@
         <div>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Accueil</a>
+                    <a class="nav-link" href="../Accueil/accueil_Eleve.php">Accueil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Dictées</a>
@@ -19,7 +19,7 @@
                     <a class="nav-link" href="#">Mots</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Résultats</a>
+                    <a class="nav-link" href="../Resultats/resultats_dictee.php">Résultats</a>
                 </li>
             </ul>
         </div>
