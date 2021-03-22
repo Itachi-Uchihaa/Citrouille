@@ -93,9 +93,11 @@ session_start(); // On démarre la session AVANT toute chose
                     <label style="display: block;">Nom Liste</label>
                     <input type="text" name="liste_nom" class="field-style field-full align-none" placeholder="" required>
                   </div>
-                  <div style="display: inline-block;">
-                    <label style="display: block;">Mot 1</label>
+                  <div>
+                    <label style="display: block; margin-top: 20px;">Mot 1</label>
                     <input type="text" name="mot_1" class="field-style field-full align-none" placeholder="" required>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="250000" />
+                    <input type="file" name="fic" size=50/>
                   </div>
                   <div style="display: inline-block;">
                     <label style="display: block;">Mot 2</label>
@@ -137,7 +139,7 @@ session_start(); // On démarre la session AVANT toute chose
                   </div>
                   </br>
                   </br>
-                  <button name="add_liste">Créer liste</button>
+                  <input type="submit" name="add_liste" value="Créer liste">
                 </ul>
               </form>
             </div>
