@@ -13,9 +13,33 @@
 
   	if(isset($_POST['add_liste']))
 	{
+		// Insertion Liste
 		mysqli_query($link, "INSERT INTO liste (liste_nom) VALUES ('".$_POST['liste_nom']."')");
-        mysqli_query($link, "INSERT INTO mot (mot_nom, liste_id, image_id) VALUES ('".$_POST['mot_nom']."', ".$_POST['liste_id'].", ".$_POST['image_id'].")");
-        //mysqli_query($link, "INSERT INTO image (image_nom, image_url) VALUES ('".$_POST['image_nom']."', '".$_POST['image_url']."')");
+
+		// Insertion Image
+		$image_nom = $_FILES['image']['name'];
+        $image_taille = $_FILES['image']['size'];
+        $image_type = $_FILES['image']['type'];
+        $image_blob = $_FILES['image']['tmp_name'];
+
+        $donnees = addslashes(fread(fopen($image_blob, "r"), $image_taille));
+        $result = mysqli_query($link, "INSERT INTO image(image_nom, image_taille, image_type, image_blob) VALUES('$image_nom', '$image_taille', '$image_type', '$donnees')");
+        $id = mysqli_insert_id($link);
+
+		// Insertion Mots
+		$last_id_liste = mysqli_insert_id($link);
+        mysqli_query($link, "INSERT INTO mot (mot_nom, liste_id, image_id) 
+		VALUES ('".$_POST['mot_1']."', ".$last_id_liste.", ".$id.")");
+		/*('".$_POST['mot_2']."', ".$last_id_liste.", ".$_POST['image_id']."),
+		('".$_POST['mot_3']."', ".$last_id_liste.", ".$_POST['image_id']."),
+		('".$_POST['mot_4']."', ".$last_id_liste.", ".$_POST['image_id']."),
+		('".$_POST['mot_5']."', ".$last_id_liste.", ".$_POST['image_id']."),
+		('".$_POST['mot_6']."', ".$last_id_liste.", ".$_POST['image_id']."),
+		('".$_POST['mot_7']."', ".$last_id_liste.", ".$_POST['image_id']."),
+		('".$_POST['mot_8']."', ".$last_id_liste.", ".$_POST['image_id']."),
+		('".$_POST['mot_9']."', ".$last_id_liste.", ".$_POST['image_id']."),
+		('".$_POST['mot_10']."', ".$last_id_liste.", ".$_POST['image_id'].")");*/
+		
 	}
 
     if(isset($_POST['modif_liste']))
@@ -28,5 +52,5 @@
 		mysqli_query($link, "DELETE FROM employe WHERE id_employe='".$_POST['delete_user']."'");
 	}
 
-	header("Location:liste_dictee.php");
+	//header("Location:liste_dictee.php");
 ?>

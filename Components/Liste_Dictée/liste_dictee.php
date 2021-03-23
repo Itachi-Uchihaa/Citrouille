@@ -93,53 +93,71 @@ session_start(); // On démarre la session AVANT toute chose
                     <label style="display: block;">Nom Liste</label>
                     <input type="text" name="liste_nom" class="field-style field-full align-none" placeholder="" required>
                   </div>
-                  <div>
+                  <form name="fo" method="POST" enctype="multipart/form-data">
                     <label style="display: block; margin-top: 20px;">Mot 1</label>
                     <input type="text" name="mot_1" class="field-style field-full align-none" placeholder="" required>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="250000" />
-                    <input type="file" name="fic" size=50/>
-                  </div>
-                  <div style="display: inline-block;">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
+                    <input type="file" name="image"/>
+                  </form>
+                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block; margin-right: 2rem;">
                     <label style="display: block;">Mot 2</label>
                     <input type="text" name="mot_2" class="field-style field-full align-none" placeholder="" required>
-                  </div>
-                  <div style="display: inline-block;">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
+                    <input type="file" name="image"/>
+                  </form>
+                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
                     <label style="display: block;">Mot 3</label>
                     <input type="text" name="mot_3" class="field-style field-full align-none" placeholder="" required>
-                  </div>
-                  <div style="display: inline-block;">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
+                    <input type="file" name="image"/>
+                  </form>
+                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
                     <label style="display: block;">Mot 4</label>
                     <input type="text" name="mot_4" class="field-style field-full align-none" placeholder="" required>
-                  </div>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
+                    <input type="file" name="image"/>
+                  </form>
                   </br>
-                  <div style="display: inline-block;">
+                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
                     <label style="display: block;">Mot 5</label>
                     <input type="text" name="mot_5" class="field-style field-full align-none" placeholder="" required>
-                  </div>
-                  <div style="display: inline-block;">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
+                    <input type="file" name="image"/>
+                  </form>
+                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
                     <label style="display: block;">Mot 6</label>
                     <input type="text" name="mot_6" class="field-style field-full align-none" placeholder="" required>
-                  </div>
-                  <div style="display: inline-block;">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
+                    <input type="file" name="image"/>
+                  </form>
+                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
                     <label style="display: block;">Mot 7</label>
                     <input type="text" name="mot_7" class="field-style field-full align-none" placeholder="" required>
-                  </div>
-                  <div style="display: inline-block;">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
+                    <input type="file" name="image"/>
+                  </form>
+                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
                     <label style="display: block;">Mot 8</label>
                     <input type="text" name="mot_8" class="field-style field-full align-none" placeholder="" required>
-                  </div>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
+                    <input type="file" name="image"/>
+                  </form>
                   </br>
-                  <div style="display: inline-block;">
+                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
                     <label style="display: block;">Mot 9</label>
                     <input type="text" name="mot_9" class="field-style field-full align-none" placeholder="" required>
-                  </div>
-                  <div style="display: inline-block;">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
+                    <input type="file" name="image"/>
+                  </form>
+                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
                     <label style="display: block;">Mot 10</label>
                     <input type="text" name="mot_10" class="field-style field-full align-none" placeholder="" required>
-                  </div>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
+                    <input type="file" name="image"/>
+                  </form>
                   </br>
                   </br>
-                  <input type="submit" name="add_liste" value="Créer liste">
+                  <input type="submit" name="add_liste" value="Créer liste" style="margin-top: 2.5rem; margin-left: 60rem;">
                 </ul>
               </form>
             </div>
