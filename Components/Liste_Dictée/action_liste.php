@@ -9,37 +9,25 @@
 
 	echo "<pre>";
 	print_r ($_POST);
+	print_r ($_FILES);
 	echo "<pre/>";
 
-  	if(isset($_POST['add_liste']))
+  	if(isset($_POST['add_liste']) && isset($_FILES))
 	{
 		// Insertion Liste
 		mysqli_query($link, "INSERT INTO liste (liste_nom) VALUES ('".$_POST['liste_nom']."')");
+		$id_liste = mysqli_insert_id($link);
 
-		// Insertion Image
-		$image_nom = $_FILES['image']['name'];
-        $image_taille = $_FILES['image']['size'];
-        $image_type = $_FILES['image']['type'];
-        $image_blob = $_FILES['image']['tmp_name'];
-
-        $donnees = addslashes(fread(fopen($image_blob, "r"), $image_taille));
-        $result = mysqli_query($link, "INSERT INTO image(image_nom, image_taille, image_type, image_blob) VALUES('$image_nom', '$image_taille', '$image_type', '$donnees')");
-        $id = mysqli_insert_id($link);
-
-		// Insertion Mots
-		$last_id_liste = mysqli_insert_id($link);
-        mysqli_query($link, "INSERT INTO mot (mot_nom, liste_id, image_id) 
-		VALUES ('".$_POST['mot_1']."', ".$last_id_liste.", ".$id.")");
-		/*('".$_POST['mot_2']."', ".$last_id_liste.", ".$_POST['image_id']."),
-		('".$_POST['mot_3']."', ".$last_id_liste.", ".$_POST['image_id']."),
-		('".$_POST['mot_4']."', ".$last_id_liste.", ".$_POST['image_id']."),
-		('".$_POST['mot_5']."', ".$last_id_liste.", ".$_POST['image_id']."),
-		('".$_POST['mot_6']."', ".$last_id_liste.", ".$_POST['image_id']."),
-		('".$_POST['mot_7']."', ".$last_id_liste.", ".$_POST['image_id']."),
-		('".$_POST['mot_8']."', ".$last_id_liste.", ".$_POST['image_id']."),
-		('".$_POST['mot_9']."', ".$last_id_liste.", ".$_POST['image_id']."),
-		('".$_POST['mot_10']."', ".$last_id_liste.", ".$_POST['image_id'].")");*/
-		
+		// Insertion Image & Mot
+		$i = 1;
+		foreach ($_FILES as $image_name) {
+			$image_id = add_Image($image_name['tmp_name'], $image_name['size'],$image_name['name'],$image_name['type'], $link);
+			add_Mot($link, $_POST['mot_'.$i], $id_liste, $image_id);
+			$i++;
+		}
+	}
+	else{
+		echo'ça marche pas :(';
 	}
 
     if(isset($_POST['modif_liste']))
@@ -49,7 +37,49 @@
 
 	if(isset($_POST['delete_liste']))
 	{
-		mysqli_query($link, "DELETE FROM employe WHERE id_employe='".$_POST['delete_user']."'");
+		delete_liste($link, $_POST['delete_liste']);
+		//mysqli_query($link, "DELETE FROM employe WHERE id_employe='".$_POST['delete_user']."'");
+	}
+
+
+	/**
+	 * Add new image in database
+	 * @param $image_blob : image tmp name
+	 * @param ...
+	 * @param ...
+	 * @param ...
+	 * @param ...
+	 * @return $id last insertion in database
+	 */
+	function add_Image($image_blob, $image_taille, $image_nom, $image_type, $link) {
+		$donnees = addslashes(fread(fopen($image_blob, "r"), $image_taille));
+        $result = mysqli_query($link, "INSERT INTO image(image_nom, image_taille, image_type, image_blob) 
+			VALUES('$image_nom', '$image_taille', '$image_type', '$donnees')");
+        return mysqli_insert_id($link);
+	}
+
+	function add_Mot($link, $mot, $id_liste, $id_image)
+	{
+		mysqli_query($link, "INSERT INTO mot (mot_nom, liste_id, image_id) VALUES ('".$mot."', ".$id_liste.", ".$id_image.")");
+	}
+
+	function delete_liste($link, $id_liste)
+	{
+		delete_image_from_liste_id($link, $id_liste);
+		mysqli_query($link, "DELETE FROM mot WHERE liste_id =".$id_liste);
+		mysqli_query($link, "DELETE FROM liste WHERE liste_id =".$id_liste);
+	}
+
+	function delete_image_from_liste_id($link, $liste_id)
+	{
+		// Recuperation des image_id associe a un id de liste
+		$images_id = mysqli_query($link, "SELECT image_id FROM mot WHERE liste_id =".$liste_id);
+
+		// Suppression des images associes a l'id de la liste
+		while($value = mysqli_fetch_array($images_id)) 
+		{
+			mysqli_query($link, "DELETE FROM image WHERE image_id =".$value['image_id']);
+		}
 	}
 
 	//header("Location:liste_dictee.php");

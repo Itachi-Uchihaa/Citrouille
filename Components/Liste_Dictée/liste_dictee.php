@@ -25,6 +25,14 @@ session_start(); // On démarre la session AVANT toute chose
     
     $link->set_charset("utf8");
     mysqli_select_db ($link, $bdd);
+
+
+    $tab_mot_img = array(
+        array("mot_1", "mot_2"),
+        array("image_1", "image_2")
+        // array("mot_1", "mot_2", "mot_3", "mot_4", "mot_5", "mot_6", "mot_7", "mot_8", "mot_9", "mot_10"),
+        // array("image_1", "image_2", "image_3", "image_4", "image_5", "image_6", "image_7", "image_8", "image_9", "image_10")
+    );
   ?>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="d-flex flex-grow-1">
@@ -63,9 +71,9 @@ session_start(); // On démarre la session AVANT toute chose
             </a>
         </li>
         <?php
-          if(isset($_GET['deconnexion']))
+          if(isset($_POST['deconnexion']))
           {
-            if($_GET['deconnexion']==true)
+            if($_POST['deconnexion']==true)
             {
               session_unset();
               header("location:Connexion/login.php");
@@ -87,74 +95,24 @@ session_start(); // On démarre la session AVANT toute chose
           <a style="padding-top:0%; margin-top:0%;" class="close" onclick="closePopUp()">&times;</a>
           <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-manuel" role="tabpanel" aria-labelledby="pills-manuel-tab">
-              <form method="POST" action="action_liste.php">
+              <form method="POST" enctype="multipart/form-data" action="action_liste.php">
                 <ul>
                   <div>
                     <label style="display: block;">Nom Liste</label>
                     <input type="text" name="liste_nom" class="field-style field-full align-none" placeholder="" required>
                   </div>
-                  <form name="fo" method="POST" enctype="multipart/form-data">
-                    <label style="display: block; margin-top: 20px;">Mot 1</label>
-                    <input type="text" name="mot_1" class="field-style field-full align-none" placeholder="" required>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
-                    <input type="file" name="image"/>
-                  </form>
-                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block; margin-right: 2rem;">
-                    <label style="display: block;">Mot 2</label>
-                    <input type="text" name="mot_2" class="field-style field-full align-none" placeholder="" required>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
-                    <input type="file" name="image"/>
-                  </form>
-                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
-                    <label style="display: block;">Mot 3</label>
-                    <input type="text" name="mot_3" class="field-style field-full align-none" placeholder="" required>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
-                    <input type="file" name="image"/>
-                  </form>
-                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
-                    <label style="display: block;">Mot 4</label>
-                    <input type="text" name="mot_4" class="field-style field-full align-none" placeholder="" required>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
-                    <input type="file" name="image"/>
-                  </form>
-                  </br>
-                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
-                    <label style="display: block;">Mot 5</label>
-                    <input type="text" name="mot_5" class="field-style field-full align-none" placeholder="" required>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
-                    <input type="file" name="image"/>
-                  </form>
-                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
-                    <label style="display: block;">Mot 6</label>
-                    <input type="text" name="mot_6" class="field-style field-full align-none" placeholder="" required>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
-                    <input type="file" name="image"/>
-                  </form>
-                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
-                    <label style="display: block;">Mot 7</label>
-                    <input type="text" name="mot_7" class="field-style field-full align-none" placeholder="" required>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
-                    <input type="file" name="image"/>
-                  </form>
-                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
-                    <label style="display: block;">Mot 8</label>
-                    <input type="text" name="mot_8" class="field-style field-full align-none" placeholder="" required>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
-                    <input type="file" name="image"/>
-                  </form>
-                  </br>
-                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
-                    <label style="display: block;">Mot 9</label>
-                    <input type="text" name="mot_9" class="field-style field-full align-none" placeholder="" required>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
-                    <input type="file" name="image"/>
-                  </form>
-                  <form name="fo" method="POST" enctype="multipart/form-data" style="display: inline-block;">
-                    <label style="display: block;">Mot 10</label>
-                    <input type="text" name="mot_10" class="field-style field-full align-none" placeholder="" required>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
-                    <input type="file" name="image"/>
-                  </form>
+                  <?php 
+                    for ($i = 0; $i < count($tab_mot_img[0]); $i++) {
+                      echo "
+                        <div style='display: inline-block;'>
+                          <label style='display: block; margin-top: 20px;'>Mot " . ($i+1) . "</label>
+                          <input type='text' name='" . $tab_mot_img[0][$i] ."' class='field-style field-full align-none' required>
+                          <input type='hidden' name='MAX_FILE_SIZE' value='900000000'/>
+                          <input type='file' name='" . $tab_mot_img[1][$i] . "'/>
+                        </div>
+                      ";
+                    }
+                  ?>
                   </br>
                   </br>
                   <input type="submit" name="add_liste" value="Créer liste" style="margin-top: 2.5rem; margin-left: 60rem;">
