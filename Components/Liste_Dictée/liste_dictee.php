@@ -166,17 +166,17 @@ session_start(); // On démarre la session AVANT toute chose
                                 {
                                   // print_r($mot);
                                   // print_r($tab_mot_img);
-                                    echo'
-                                    <div style="display: inline-block;">
-                                      <label style="display: block; margin-top: 20px;">Mot '.($i + 1).'</label>
-                                      <input type="text" name="mot[]" value="'.$mot['mot_nom'].'" required>
-                                      <input type="text" name="mot_id[]" value="'.$mot['mot_id'].'" style="display: none;">
-                                      <input type="text" name="image_id[]" value="'.$mot['image_id'].'" style="display: none;">
-                                      <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
-                                      <input type="file" name="'.$mot['image_id'].'"/>
-                                    </div>
-                                    ';
-                                    $i++;
+                                  echo'
+                                  <div style="display: inline-block;">
+                                    <label style="display: block; margin-top: 20px;">Mot '.($i + 1).'</label>
+                                    <input type="text" name="mot[]" value="'.$mot['mot_nom'].'" required>
+                                    <input type="text" name="mot_id[]" value="'.$mot['mot_id'].'" style="display: none;">
+                                    <input type="text" name="image_id[]" value="'.$mot['image_id'].'" style="display: none;">
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
+                                    <input type="file" name="'.$mot['image_id'].'"/>
+                                  </div>
+                                  ';
+                                  $i++;
                                 }
                                 echo'</br>
                                 </br>
