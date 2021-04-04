@@ -23,7 +23,7 @@ if(isset($_POST['utilisateur_login']) && isset($_POST['utilisateur_password']))
         {
             $_SESSION['utilisateur_login'] = $utilisateur_login;
             echo"Page accueil existe pas";
-            //header('Location: accueil.php');
+            header('Location: ../Liste_Dictée/liste_dictee.php');
         }
 
         else

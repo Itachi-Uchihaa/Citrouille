@@ -28,10 +28,8 @@ session_start(); // On démarre la session AVANT toute chose
 
 
     $tab_mot_img = array(
-        array("mot_1", "mot_2"),
-        array("image_1", "image_2")
-        // array("mot_1", "mot_2", "mot_3", "mot_4", "mot_5", "mot_6", "mot_7", "mot_8", "mot_9", "mot_10"),
-        // array("image_1", "image_2", "image_3", "image_4", "image_5", "image_6", "image_7", "image_8", "image_9", "image_10")
+        array("mot_1", "mot_2", "mot_3", "mot_4", "mot_5"),
+        array("image_1", "image_2", "image_3", "image_4", "image_5")
     );
   ?>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -102,15 +100,16 @@ session_start(); // On démarre la session AVANT toute chose
                     <input type="text" name="liste_nom" class="field-style field-full align-none" placeholder="" required>
                   </div>
                   <?php 
-                    for ($i = 0; $i < count($tab_mot_img[0]); $i++) {
-                      echo "
-                        <div style='display: inline-block;'>
-                          <label style='display: block; margin-top: 20px;'>Mot " . ($i+1) . "</label>
-                          <input type='text' name='" . $tab_mot_img[0][$i] ."' class='field-style field-full align-none' required>
-                          <input type='hidden' name='MAX_FILE_SIZE' value='900000000'/>
-                          <input type='file' name='" . $tab_mot_img[1][$i] . "'/>
+                    for ($i = 0; $i < count($tab_mot_img[0]); $i++) 
+                    {
+                      echo'
+                        <div style="display: inline-block;">
+                          <label style="display: block; margin-top: 20px;">Mot '.($i+1).'</label>
+                          <input type="text" name="'.$tab_mot_img[0][$i].'" class="field-style field-full align-none" required>
+                          <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
+                          <input type="file" name="'.$tab_mot_img[1][$i].'"/>
                         </div>
-                      ";
+                      ';
                     }
                   ?>
                   </br>
@@ -134,11 +133,6 @@ session_start(); // On démarre la session AVANT toute chose
               <th scope="col">Mot 3</th>
               <th scope="col">Mot 4</th>
               <th scope="col">Mot 5</th>
-              <th scope="col">Mot 6</th>
-              <th scope="col">Mot 7</th>
-              <th scope="col">Mot 8</th>
-              <th scope="col">Mot 9</th>
-              <th scope="col">Mot 10</th>
             </tr>
           </thead>
           <tbody>
@@ -159,44 +153,34 @@ session_start(); // On démarre la session AVANT toute chose
                       <div class=" container">
                         <div class="row row-cols-2">
                           <div class="col">';
-                            echo'<form class="form-style-9" method="POST" action="action_liste.php">
+                            echo'<form class="form-style-9" method="POST" enctype="multipart/form-data" action="action_liste.php">
                               <ul>
-                                <p> 
-                                  Liste Nom: <input type="text" name="liste_nom" class="field-style field-full align-none" value="' .$liste['liste_nom'].'" required>
-                                </p>
-                                <p> 
-                                  Mot 1: <input type="text" name="mot_1" class="field-style field-full align-none" value="' .$mot['mot_nom'].'" required>
-                                </p>
-                                <p> 
-                                  Mot 2: <input type="text" name="mot_2" class="field-style field-full align-none" value="' .$mot['mot_nom'].'" required>
-                                </p>
-                                <p> 
-                                  Mot 3: <input type="text" name="mot_3" class="field-style field-full align-none" value="' .$mot['mot_nom'].'" required>
-                                </p>
-                                <p> 
-                                  Mot 4: <input type="text" name="mot_4" class="field-style field-full align-none" value="' .$mot['mot_nom'].'" required>
-                                </p>
-                                <p> 
-                                  Mot 5: <input type="text" name="mot_5" class="field-style field-full align-none" value="' .$mot['mot_nom'].'" required>
-                                </p>
-                                <p> 
-                                  Mot 6: <input type="text" name="mot_6" class="field-style field-full align-none" value="' .$mot['mot_nom'].'" required>
-                                </p>
-                                <p> 
-                                  Mot 7: <input type="text" name="mot_7" class="field-style field-full align-none" value="' .$mot['mot_nom'].'" required>
-                                </p>
-                                <p> 
-                                  Mot 8: <input type="text" name="mot_8" class="field-style field-full align-none" value="' .$mot['mot_nom'].'" required>
-                                </p>
-                                <p> 
-                                  Mot 9: <input type="text" name="mot_9" class="field-style field-full align-none" value="' .$mot['mot_nom'].'" required>
-                                </p>
-                                <p> 
-                                  Mot 10: <input type="text" name="mot_10" class="field-style field-full align-none" value="' .$mot['mot_nom'].'" required>
-                                </p>
+                                <div>
+                                  <label style="display: block;">Nom Liste</label>
+                                  <input type="text" name="liste_nom" class="field-style field-full align-none" value="'.$liste['liste_nom'].'" required>
+                                  <input type="text" name="liste_id" value="'.$liste['liste_id'].'" style="display: none;">
+                                </div>';
+                                $req_mot = mysqli_query($link, "SELECT * FROM mot WHERE liste_id = ".$liste['liste_id']);
+                                $i = 0;
+                                while($mot = mysqli_fetch_array($req_mot)) 
+                                {
+                                  // print_r($mot);
+                                  // print_r($tab_mot_img);
+                                    echo'
+                                    <div style="display: inline-block;">
+                                      <label style="display: block; margin-top: 20px;">Mot '.($i + 1).'</label>
+                                      <input type="text" name="mot[]" value="'.$mot['mot_nom'].'" required>
+                                      <input type="text" name="mot_id[]" value="'.$mot['mot_id'].'" style="display: none;">
+                                      <input type="text" name="image_id[]" value="'.$mot['image_id'].'" style="display: none;">
+                                      <input type="hidden" name="MAX_FILE_SIZE" value="900000000"/>
+                                      <input type="file" name="'.$mot['image_id'].'"/>
+                                    </div>
+                                    ';
+                                    $i++;
+                                }
+                                echo'</br>
                                 </br>
-                                </br>
-                                <button name="modif_liste">Modifier liste</button>
+                                <input type="submit" name="modif_liste" value="Modifier liste" style="margin-top: 2.5rem; margin-left: 60rem;">
                               </ul>
                             </form>
                           </div>
