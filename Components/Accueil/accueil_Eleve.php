@@ -1,3 +1,7 @@
+<?php
+include ("../Navbar/navbar.php");
+?>
+
 <link href="accueil_Eleve.css" rel="stylesheet">
 
 <div class="container">
@@ -26,5 +30,4 @@
             </div>
         </div>
     </div>
-
 </div>
