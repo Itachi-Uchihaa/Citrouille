@@ -37,10 +37,10 @@ session_start(); // On démarre la session AVANT toute chose
             <a class="nav-link" href="#">Accueil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Dictées</a>
+            <a class="nav-link" href="#">Liste Mots</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Mots</a>
+            <a class="nav-link" href="#">Dictées</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Résultats</a>
