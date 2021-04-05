@@ -45,9 +45,7 @@
         </div>
     </div>
     <div>
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item" style="color: white; font-size: 25px">
-            </li>
+        <ul class="navbar-nav mr-auto">            
             <li class="nav-item">
                 <a class="nav-link" href="../Connexion/deconnexion.php"><i class="fa fa-sign-out-alt fa-2x"></i></a>
             </li>
