@@ -33,7 +33,6 @@ session_start();
             <li class="nav-item" style="color: white; font-size: 25px">
                 <?php
                     echo "<p>".$_SESSION['role_id']."</p>";
-
                 ?>
             </li>
             <li class="nav-item">
