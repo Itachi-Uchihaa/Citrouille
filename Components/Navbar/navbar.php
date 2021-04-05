@@ -26,8 +26,14 @@
     </div>
     <div>
         <ul class="navbar-nav mr-auto">
+            <li class="nav-item" style="color: white; font-size: 25px">
+                <?php
+                    echo "<p>".$_SESSION['role_id']."</p>";
+
+                ?>
+            </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-sign-out-alt fa-2x"></i></a>
+                <a class="nav-link" href="../Connexion/deconnexion.php"><i class="fa fa-sign-out-alt fa-2x"></i></a>
             </li>
         </ul>
     </div>
