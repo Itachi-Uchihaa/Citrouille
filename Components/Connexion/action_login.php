@@ -1,47 +1,47 @@
 <?php
 session_start();
-if(isset($_POST['utilisateur_login']) && isset($_POST['utilisateur_password']))
+if(!empty($_POST['utilisateur_login']) AND !empty($_POST['utilisateur_password']))
 {
-    $db_id = 'root';
-    $db_utilisateur_password = '';
-    $db_name = 'citrouille';
-    $db_host = 'localhost';
-    var_dump($db_host, $db_id, $db_utilisateur_password, $db_name);
-    $db = mysqli_connect($db_host, $db_id, $db_utilisateur_password, $db_name) or die('Connexion échoué');
+    $login=htmlspecialchars($_POST['utilisateur_login']);
+    $password= htmlspecialchars($_POST['utilisateur_password']);
+    $bdd=mysqli_connect("localhost","root","","citrouille");
 
-    $utilisateur_login = mysqli_real_escape_string($db, htmlspecialchars($_POST['utilisateur_login']));
-    $utilisateur_password = mysqli_real_escape_string($db, htmlspecialchars($_POST['utilisateur_password']));
 
-    if($utilisateur_login !== "" && $utilisateur_password !== "")
+    if($bdd)
     {
-        $req = "SELECT count(*) FROM utilisateur WHERE utilisateur_login = '".$utilisateur_login."' AND utilisateur_password = '".$utilisateur_password."' ";
-        $exec_req = mysqli_query($db, $req);
-        $reponse = mysqli_fetch_array($exec_req);
-        $count = $reponse['count(*)'];
+        $req = "SELECT * FROM utilisateur WHERE utilisateur_login = '".$login."' AND utilisateur_password = '".$password."' ";
+        $res = mysqli_query($bdd, $req);
+        $num = mysqli_num_rows($res);
 
-        if($count != 0) // id et mdp correctes
+        if($num == 1) // id et mdp correctes
         {
-            $_SESSION['utilisateur_login'] = $utilisateur_login;
-            echo"Page accueil existe pas";
-            header('Location: ../Liste_Dictée/liste_dictee.php');
+            // CONNEXION
+            $ligne=mysqli_fetch_array($res); // prends la ligne une
+            //var_dump($ligne);
+            $_SESSION['utilisateur_login'] = $login;
+            $_SESSION['role_id'] = $ligne["role_id"];
+            echo $_SESSION['utilisateur_login'];
+            if($_SESSION['role_id'] == "2")
+            {
+                header("location: ../Accueil/accueil_Professeur.php");
+            }
+            else
+            {
+                header("location: ../Accueil/accueil_Eleve.php");
+            }
+            mysqli_free_result($res); // libération de la mémoire des resultats
         }
-
         else
         {
             header('Location: login.php?erreur=1'); // id ou mdp incorrect
+            echo "<script>alert('Votre nom utilisateur ou mot de passe est incorrect')</script>";
         }
     }
-
-    else
-    {
-        header('Location: login.php?erreur=2'); // id ou mdp vide
-    }
+    mysqli_close($bdd); // fermeture de la connexion
 }
-
 else
 {
-    header('Location: login.php');
+    echo "<p> probleme de connexion au serveur</p>";
 }
 
-mysqli_close($db);
 ?>
